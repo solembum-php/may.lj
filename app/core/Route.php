@@ -40,10 +40,12 @@ class Route {
 	    $controllerName = strtolower($routeItems[0]);
 	}
 	if (!empty($routeItems[1])) {
-	    //$actionName = mb_strtolower(urldecode($routeItems[1]));//для кириллицы
+	    //для кириллицы
+	    //$actionName = mb_strtolower(urldecode($routeItems[1]));
 	    $actionName = strtolower($routeItems[1]);
 	}
-	//$controllerClassName = mb_convert_case($controllerName, MB_CASE_TITLE);// для кириллицы
+	// для кириллицы
+	//$controllerClassName = mb_convert_case($controllerName, MB_CASE_TITLE);
 	$controllerClassName = 'controllers\\' . ucfirst($controllerName) . 'Controller';
 	if (!class_exists($controllerClassName)) {
 	    self::error404();
