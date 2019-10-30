@@ -7,7 +7,6 @@ class Route {
     /**
      * routing/controller/action
      */
-    
     static public function init() {
 	//######################################################################
 	//получить дополнительный путь и разбить его на элементы по / если есть 
@@ -18,13 +17,13 @@ class Route {
 	//статический для ошибки 404
 	//######################################################################
 	//это значение останется в переменной, если не произойдет перезапись
-	$controllerName = 'main'; 
+	$controllerName = 'main';
 	//это значение останется в переменной, если не произойдет перезапись
 	$actionName = 'index';
 	//забираем дополнительный путь документа в домене и разделяем его на список(это массив с числовым индексом)
-	$routeItems = explode('/', $_SERVER['REQUEST_URI']); 
+	$routeItems = explode('/', $_SERVER['REQUEST_URI']);
 	//0-й элемент всегда содержит пустую строку поэтому удаляем его
-	array_shift($routeItems); 
+	array_shift($routeItems);
 	//проверяем последний элемент массва на пустое значение
 	//при необходимости удаляем его
 	if (empty($routeItems[count($routeItems) - 1])) {
@@ -63,6 +62,10 @@ class Route {
 	$view = new View();
 	$view->render('error_404_view');
 	exit();
+    }
+
+    static public function redirect(string $url) {
+	header('Location:' . $url);
     }
 
 }
