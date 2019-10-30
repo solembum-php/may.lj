@@ -19,6 +19,6 @@
 	<main>
 	    <?php include_once getAppPath() . 'views' . DIRECTORY_SEPARATOR . $page . '.php'; ?>
 	</main>
-	<footer>"may" webstudio 2019$copy;</footer>
+	<footer>"may" webstudio 2019&copy;</footer>
     </body>
 </html>
