@@ -48,6 +48,11 @@ class AuthController extends AbstractController {
 	}
 	Route::redirect(url('/'));
     }
+    
+    public function logout(){
+	session_destroy();
+	Route::redirect(url('/'));
+    }
 
     /**
      * create and return model object
