@@ -20,6 +20,11 @@ class AuthModel extends AbstractModel {
 	}
     }
     
+    /**
+     * add user to db
+     * 
+     * @param array $user
+     */
     public function addUser($user) {
 	$hash = password_hash($user['pass'], PASSWORD_BCRYPT);
 	$query = "insert into users values (null, '{$user['login']}','$hash','{$user['email']}')";
