@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /**
  * 
  * @return string app path from server root
