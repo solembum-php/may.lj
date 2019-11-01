@@ -33,4 +33,16 @@ class AuthModel extends AbstractModel {
 	    die($this->db->error);
 	}
     }
+    
+    public function authenticationUser(array $user){
+	$query = "select * from users where login = '{$user['login']}';";
+	$result = $this->db->query($query);
+	if($result){
+	    $user = $result->fetch_object();
+	    $_SESSION['user'] = $user;
+	    return true;
+	}else{
+	    return false;
+	}
+    }
 }

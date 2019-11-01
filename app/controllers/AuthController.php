@@ -10,42 +10,67 @@ use models\AuthModel;
 class AuthController extends AbstractController {
 
     public function index() {
-        $this->view->render('auth_index_view');
+	$this->view->render('auth_index_view');
     }
 
     public function registration() {
-        $this->view->render('auth_register_view');
+	$this->view->render('auth_register_view');
     }
 
     public function regproc() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            die('not available request method');
-        }
-        
-        $user = filter_input_array(INPUT_POST);
-        $errors = Route::userValidate($user);
+	$this->_checkMethod('POST');
 
-        if (!empty($errors)) {
-            
-            $_SESSION['errors'] = $errors;
-            $_SESSION['login'] = $user['login'];
-            $_SESSION['email'] = $user['email'];
-            
-            
-            Route::redirect(url('/auth/registration'));
-        } else {
-            $model = $this->getModel();
-            $model->addUser($user);
-            Route::redirect(url('/auth'));
-        }
-        //TODO все проверки
+	$user = filter_input_array(INPUT_POST);
+	$errors = Route::userValidate($user);
+
+	if (!empty($errors)) {
+
+	    $_SESSION['errors'] = $errors;
+	    $_SESSION['login'] = $user['login'];
+	    $_SESSION['email'] = $user['email'];
+
+
+	    Route::redirect(url('/auth/registration'));
+	} else {
+	    $model = $this->_getModel();
+	    $model->addUser($user);
+	    Route::redirect(url('/auth'));
+	}
     }
 
-    protected function getModel() {
-        if (!$this->model) {
-            $this->model = new AuthModel();
-        }
-        return $this->model;
+    public function login() {
+	$this->_checkMethod('POST');
+	$user = filter_input_array(INPUT_POST);
+	//TODO validate input data
+	if(!$this->_getModel()->authenticationUser($user)){
+	    //TODO send error to login
+	    Route::redirect(url('/auth/index'));
+	}
+	Route::redirect(url('/'));
+    }
+
+    /**
+     * create and return model object
+     * 
+     * @return AuthModel
+     */
+    protected function _getModel() {
+	if (!$this->model) {
+	    $this->model = new AuthModel();
+	}
+	return $this->model;
+    }
+
+    /**
+     * check HTTP method or die
+     * 
+     * @param string $method
+     */
+    protected function _checkMethod(string $method) {
+	$method = strtoupper($method);
+	if ($_SERVER['REQUEST_METHOD'] !== $method) {
+	    die('not available request method');
+	}
     }
 
 }
