@@ -31,7 +31,7 @@ class AuthController extends AbstractController {
             $_SESSION['login'] = $user['login'];
             $_SESSION['email'] = $user['email'];
             
-            var_dump($_SESSION);
+            
             Route::redirect(url('/auth/registration'));
         } else {
             $model = $this->getModel();
