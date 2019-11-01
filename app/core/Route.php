@@ -2,6 +2,8 @@
 
 namespace core;
 
+use models\AuthModel;
+
 class Route {
 
     /**
@@ -53,6 +55,9 @@ class Route {
         if (!method_exists($controller, $actionName)) {
             self::error404();
         }
+	if($controllerName !== 'auth' && !AuthModel::haveAuthUser()){
+	    Route::redirect(url('/auth'));
+	}
         $controller->$actionName();
     }
 

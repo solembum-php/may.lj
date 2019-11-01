@@ -45,4 +45,18 @@ class AuthModel extends AbstractModel {
 	    return false;
 	}
     }
+    
+    /**
+     * check user in session
+     * 
+     * @return boolean
+     */
+    public static function haveAuthUser(){
+	//return !empty($_SESSION['user']);
+	if(empty($_SESSION['user'])){
+	    return false;
+	}else{
+	    return true;
+	}
+    }
 }
