@@ -13,6 +13,16 @@ class PostsModel extends AbstractModel {
 	    die($this->db->error);
 	}
 	$posts = $result->fetch_all(MYSQLI_ASSOC);
+	array_walk($posts, function (&$post) {
+	    $maxLengh = 100;
+	    if (mb_strlen($post['text'], "UTF-8") > $maxLengh) {
+		$textCut = mb_substr($post['text'], 0, $maxLengh, "UTF-8");
+		$words = explode(" ", $textCut);
+		unset($words[count($words) - 1]);
+		$shortText = implode(" ", $words);
+		$post['text'] = $shortText . "...";
+	    }
+	});
 //	$posts = [];
 //	while ($post = $result->fetch_object()) {
 //	    $posts[] = $post;
