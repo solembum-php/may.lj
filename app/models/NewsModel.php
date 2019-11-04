@@ -29,7 +29,24 @@ class NewsModel extends AbstractModel {
                 die($this->db->error);
             }
             return $posts;
+	    
         }
     }
+//        public static function haveAuthPost() {
+//	//return !empty($_SESSION['user']);
+//	if (empty($_SESSION['post'])) {
+//	    return false;
+//	} else {
+//	    return true;
+//	}
+//    }
+//
+//    public static function getAuthPost() {
+//	if (self::haveAuthPost()) {
+//	    return $_SESSION['post'];
+//	} else {
+//	    return false;
+//	}
+//    }
 
 }

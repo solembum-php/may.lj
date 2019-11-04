@@ -1,7 +1,8 @@
 <p><a href="<?= url('/news/addnews') ?>">add news</a></p>
 <div>
     <?php
-    controllers\NewsController::showposts();
+    $posts = models\NewsModel::getAll();
+    var_dump($posts);
      
     ?>
 </div>
