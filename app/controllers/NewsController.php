@@ -29,16 +29,6 @@ class NewsController extends AbstractController {
         Route::redirect(url('/news'));
     }
 
-    public function showposts() {
-        $model = $this->_getModel();
-        $posts = $model->getAllPosts();
-       
-        foreach ($posts as $post) {
-            echo '<h3>' . $post['title'] . '</h3>';
-            echo '<textarea>' . $post['text'] . '</textarea>';
-        }
-    }
-
     /**
      * create and return model object
      * 
