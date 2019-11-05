@@ -29,5 +29,18 @@ class PostsModel extends AbstractModel {
 //	}
 	return $posts;
     }
+    
+        /**
+     * add new post
+     * 
+     * @param array $post
+     */
+    public function addPost($post) {
+        $query = "insert into posts values (null, '{$post['title']}','{$post['text']}',null)";
+        $this->db->query($query);
+        if ($this->db->errno) {
+            die($this->db->error);
+        }
+    }
 
 }
