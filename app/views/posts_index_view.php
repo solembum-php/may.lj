@@ -2,6 +2,6 @@
     <h2><a href="<?= url('/posts/item?id' . $postItem['title']) ?>"><?= $postItem['title'] ?></a></h2>
     <div><?= $postItem['text'] ?></div>
 
-    <div>Автор: <?= $postItem['title'] ?></div>
+    <div>Автор: <?= $postItem['author'] ?></div>
 <?php endforeach; ?>
 
