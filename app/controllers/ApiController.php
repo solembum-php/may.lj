@@ -18,7 +18,12 @@ class ApiController extends AbstractController {
 	;
     }
     
-    public function getAuthors(){
+    public function getauthors(){
+	$model = $this->_getModel();
+	$authors = $model->getAllAuthors();
+	$json = json_encode($authors);
+	header('Content-type:application/json');
+	echo $json;
 	
     }
 }
