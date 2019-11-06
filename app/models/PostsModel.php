@@ -37,7 +37,9 @@ class PostsModel extends AbstractModel {
      * @param array $post
      */
     public function addPost($post) {
-        $query = "insert into posts values (null, '{$post['title']}', '{$post['text']}', null)";
+//        $_SESSION['user'] = $user;
+//	$post['user_id'] = $user['id'];
+	$query = "insert into posts values (null, '{$post['title']}', '{$post['text']}', null)";
         $this->db->query($query);
         if ($this->db->errno) {
             die($this->db->error);
