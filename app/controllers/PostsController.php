@@ -37,7 +37,6 @@ class PostsController extends AbstractController {
         $this->_checkMethod('POST');
 
         $post = filter_input_array(INPUT_POST);
-
         $model = $this->_getModel();
         $model->addPost($post);
         Route::redirect(url('/posts'));
