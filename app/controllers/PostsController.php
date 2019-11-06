@@ -13,6 +13,11 @@ use core\Route;
  */
 class PostsController extends AbstractController {
 
+    public function __construct() {
+	parent::__construct();
+	$this->_modelClass= PostsModel::class;
+    }
+    
     public function index() {
         $this->view->posts = $this->_getModel()->all();
         $this->view->render('posts_index_view');
@@ -40,18 +45,6 @@ class PostsController extends AbstractController {
         $model = $this->_getModel();
         $model->addPost($post);
         Route::redirect(url('/posts'));
-    }
-
-    /**
-     * create and return model object
-     * 
-     * @return PostsModel
-     */
-    protected function _getModel() {
-        if (!$this->model) {
-            $this->model = new PostsModel();
-        }
-        return $this->model;
     }
 
     /**
